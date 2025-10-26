@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get "/home", controller: "home", action: :show
+
   resources :questions
   resources :questionnaires
   resources :question_options

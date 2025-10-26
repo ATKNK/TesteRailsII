@@ -1,16 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: #cbfbf1"><%= notice %></p>
 
 <% content_for :title, "Questionnaires" %>
 
-<h1>Questionnaires</h1>
+  <div class="flex flex-row justify-between w-full py-[1%]">
+    <p class="text-3xl">Questionnaires</p>
+    
+    <%= link_to "New questionnaire", new_questionnaire_path %>
+  </div>
 
-<div id="questionnaires">
+<div id="questionnaires" class="grid grid-cols-3 gap-[5%] justify-center pb-[5vh]">
   <% @questionnaires.each do |questionnaire| %>
     <%= render questionnaire %>
-    <p>
-      <%= link_to "Show this questionnaire", questionnaire %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New questionnaire", new_questionnaire_path %>
+

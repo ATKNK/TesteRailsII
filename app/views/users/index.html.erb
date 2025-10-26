@@ -1,16 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: #cbfbf1"><%= notice %></p>
 
 <% content_for :title, "Users" %>
 
-<h1>Users</h1>
+  <div class="flex flex-row justify-between w-full py-[1%]">
+    <p class="text-3xl">Users</p>
 
-<div id="users" class="bg-sky-500">
+    <%= link_to "New user", new_user_path%>
+  </div>
+
+<div id="users" class="grid grid-cols-3 gap-[5%] justify-center pb-[5vh]">
   <% @users.each do |user| %>
     <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
   <% end %>
 </div>
-
-<%= link_to "New user", new_user_path %>
