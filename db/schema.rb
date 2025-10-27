@@ -16,6 +16,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_034210) do
 
   create_table "question_options", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.datetime "deleted_at", precision: nil
     t.boolean "is_correct"
     t.bigint "question_id", null: false
     t.string "title"
@@ -98,7 +99,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_034210) do
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
-  add_foreign_key "question_options", "questions"
+  add_foreign_key "question_options", "questions", column: "questions_id"
   add_foreign_key "questions", "questionnaires"
   add_foreign_key "user_answer_histories", "question_options"
   add_foreign_key "user_answer_histories", "questionnaires", column: "questionnaires_id"

@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1
   def show
+    @question_options = QuestionOption.all
   end
 
   # GET /questions/new
@@ -50,11 +51,10 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   def destroy
-    # Para soft delete:
-    @question.update(deleted_at: Time.current)
+    @question.destroy!
 
     respond_to do |format|
-      format.html { redirect_to questions_path, notice: "Question was successfully deleted.", status: :see_other }
+      format.html { redirect_to questions_path, notice: "Question was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
   end

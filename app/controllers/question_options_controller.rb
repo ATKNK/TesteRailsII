@@ -2,28 +2,20 @@ class QuestionOptionsController < ApplicationController
   before_action :set_question_option, only: %i[ show edit update destroy ]
   before_action :set_questions, only: %i[ new edit create update ]
 
-  # GET /question_options
   def index
-    @question_options = QuestionOption.all
+    @question_options = QuestionOption.includes(:question).all
   end
 
-  # GET /question_options/1
-  def show
-  end
+  def show; end
 
-  # GET /question_options/new
   def new
     @question_option = QuestionOption.new
   end
 
-  # GET /question_options/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /question_options
   def create
     @question_option = QuestionOption.new(question_option_params)
-    @questions = Question.all  # garante que a variável exista se houver erro no form
 
     if @question_option.save
       redirect_to @question_option, notice: "Question option was successfully created."
@@ -32,10 +24,7 @@ class QuestionOptionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /question_options/1
   def update
-    @questions = Question.all
-
     if @question_option.update(question_option_params)
       redirect_to @question_option, notice: "Question option was successfully updated."
     else
@@ -43,9 +32,8 @@ class QuestionOptionsController < ApplicationController
     end
   end
 
-  # DELETE /question_options/1
   def destroy
-    @question_option.destroy
+    @question_option.soft_destroy
     redirect_to question_options_url, notice: "Question option was successfully destroyed."
   end
 

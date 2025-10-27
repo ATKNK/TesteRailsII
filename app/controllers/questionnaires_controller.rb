@@ -8,7 +8,6 @@ class QuestionnairesController < ApplicationController
 
   # GET /questionnaires/1
   def show
-    # Carrega apenas as questões deste questionário
     @questions = @questionnaire.questions
   end
 
