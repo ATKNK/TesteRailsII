@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_27_033621) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_27_034210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -57,6 +57,23 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_033621) do
     t.index ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
   end
 
+  create_table "user_answer_histories", force: :cascade do |t|
+    t.datetime "answered_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at", precision: nil
+    t.boolean "is_correct"
+    t.bigint "question_id", null: false
+    t.bigint "question_option_id", null: false
+    t.text "question_snapshot"
+    t.bigint "questionnaires_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["question_id"], name: "index_user_answer_histories_on_question_id"
+    t.index ["question_option_id"], name: "index_user_answer_histories_on_question_option_id"
+    t.index ["questionnaires_id"], name: "index_user_answer_histories_on_questionnaires_id"
+    t.index ["user_id"], name: "index_user_answer_histories_on_user_id"
+  end
+
   create_table "user_results", force: :cascade do |t|
     t.integer "correct_answers"
     t.datetime "created_at", null: false
@@ -83,6 +100,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_033621) do
 
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "questionnaires"
+  add_foreign_key "user_answer_histories", "question_options"
+  add_foreign_key "user_answer_histories", "questionnaires", column: "questionnaires_id"
+  add_foreign_key "user_answer_histories", "questions"
+  add_foreign_key "user_answer_histories", "users"
   add_foreign_key "user_results", "questionnaires", column: "questionnaires_id"
   add_foreign_key "user_results", "users"
 end

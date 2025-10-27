@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :questionnaire
   has_many :question_options, dependent: :destroy
+  has_many :user_answer_history
 
   accepts_nested_attributes_for :question_options, allow_destroy: true
 end
