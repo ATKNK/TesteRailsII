@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :questionnaire_id, style: "display: block" %>
-    <%= form.collection_select :questionnaire_id, @questionnaires, :id, :title, prompt: "Select a questionnaire", class: "border rounded px-2 py-1 w-full" %>
+    <%= form.text_field :questionnaire_id %>
   </div>
 
   <div>

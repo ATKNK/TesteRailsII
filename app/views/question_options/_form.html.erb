@@ -1,0 +1,32 @@
+<%= form_with(model: question_option) do |form| %>
+  <% if question_option.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(question_option.errors.count, "error") %> prohibited this question option from being saved:</h2>
+
+      <ul>
+        <% question_option.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :is_correct, style: "display: block" %>
+    <%= form.check_box :is_correct %>
+  </div>
+
+  <div>
+    <%= form.label :question_id, "Question", style: "display: block" %>
+    <%= form.collection_select :question_id, @questions, :id, :enunciation, prompt: "Select a question" %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

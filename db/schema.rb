@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_27_000408) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_27_012509) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "question_options", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "is_correct"
+    t.bigint "question_id", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_options_on_question_id"
+  end
 
   create_table "questionnaires", force: :cascade do |t|
     t.string "code"
@@ -58,5 +67,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_000408) do
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
+  add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "questionnaires"
 end
