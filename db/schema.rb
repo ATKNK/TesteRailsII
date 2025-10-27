@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_27_012509) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_27_033621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -57,6 +57,20 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_012509) do
     t.index ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
   end
 
+  create_table "user_results", force: :cascade do |t|
+    t.integer "correct_answers"
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at", precision: nil
+    t.bigint "questionnaires_id", null: false
+    t.decimal "score"
+    t.datetime "submitted_at", precision: nil
+    t.integer "total_questions"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["questionnaires_id"], name: "index_user_results_on_questionnaires_id"
+    t.index ["user_id"], name: "index_user_results_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "cpf"
     t.datetime "created_at", null: false
@@ -69,4 +83,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_27_012509) do
 
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "questionnaires"
+  add_foreign_key "user_results", "questionnaires", column: "questionnaires_id"
+  add_foreign_key "user_results", "users"
 end

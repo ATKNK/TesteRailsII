@@ -14,5 +14,5 @@ class Questionnaire < ApplicationRecord
   end
 
   has_many :questions
-  
+  has_many :user_results
 end
