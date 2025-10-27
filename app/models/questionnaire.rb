@@ -12,5 +12,7 @@ class Questionnaire < ApplicationRecord
   def destroy
     soft_delete
   end
+
+  has_many :questions
   
 end

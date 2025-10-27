@@ -4,6 +4,18 @@
 
 <%= render @questionnaire %>
 
+<h1><%= @questionnaire.title %></h1>
+<p><%= @questionnaire.description %></p>
+
+<h2>Questions</h2>
+<a href="/questions/new">Add more questions</a>
+<ul>
+  <% @questions.each do |question| %>
+    <li><%= question.enunciation %></li>
+  <% end %>
+</ul>
+
+
 <div class="flex flex-row pt-[4vh]">
   <%= link_to "Edit this questionnaire", edit_questionnaire_path(@questionnaire) %> |
 

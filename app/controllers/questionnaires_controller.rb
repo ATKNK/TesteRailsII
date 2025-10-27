@@ -1,13 +1,15 @@
 class QuestionnairesController < ApplicationController
   before_action :set_questionnaire, only: %i[ show edit update destroy ]
 
-  # GET /questionnaires or /questionnaires.json
+  # GET /questionnaires
   def index
     @questionnaires = Questionnaire.all
   end
 
-  # GET /questionnaires/1 or /questionnaires/1.json
+  # GET /questionnaires/1
   def show
+    # Carrega apenas as questões deste questionário
+    @questions = @questionnaire.questions
   end
 
   # GET /questionnaires/new
@@ -19,7 +21,7 @@ class QuestionnairesController < ApplicationController
   def edit
   end
 
-  # POST /questionnaires or /questionnaires.json
+  # POST /questionnaires
   def create
     @questionnaire = Questionnaire.new(questionnaire_params)
 
@@ -34,7 +36,7 @@ class QuestionnairesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /questionnaires/1 or /questionnaires/1.json
+  # PATCH/PUT /questionnaires/1
   def update
     respond_to do |format|
       if @questionnaire.update(questionnaire_params)
@@ -47,7 +49,7 @@ class QuestionnairesController < ApplicationController
     end
   end
 
-  # DELETE /questionnaires/1 or /questionnaires/1.json
+  # DELETE /questionnaires/1
   def destroy
     @questionnaire.destroy!
 
@@ -58,13 +60,12 @@ class QuestionnairesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_questionnaire
-      @questionnaire = Questionnaire.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def questionnaire_params
-      params.expect(questionnaire: [ :code, :title, :description, :duration_minutes])
-    end
+  def set_questionnaire
+    @questionnaire = Questionnaire.find(params[:id])
+  end
+
+  def questionnaire_params
+    params.require(:questionnaire).permit(:code, :title, :description, :duration_minutes)
+  end
 end
