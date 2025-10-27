@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  enunciation: MyString
+  deleted_at: 2025-10-26 21:04:08
+  questionnaire: one
+
+two:
+  enunciation: MyString
+  deleted_at: 2025-10-26 21:04:08
+  questionnaire: two

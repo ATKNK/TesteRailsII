@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_26_211355) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_27_000408) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_26_211355) do
     t.integer "duration_minutes"
     t.string "title"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.string "enunciation"
+    t.bigint "questionnaire_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questionnaire_id"], name: "index_questions_on_questionnaire_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -48,4 +57,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_26_211355) do
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
+
+  add_foreign_key "questions", "questionnaires"
 end
