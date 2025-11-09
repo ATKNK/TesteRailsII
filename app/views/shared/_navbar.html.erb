@@ -1,8 +1,12 @@
-<navbar class="flex flex-row justify-between items-center box-border w-full h-[10vh] bg-sky-950 text-amber-300">
+<navbar class="flex flex-row justify-between items-center box-border w-full h-[10vh] bg-blue-950 text-amber-300">
   <a class="px-[3%] text-xl font-bold" href="/home">Code Quiz</a>
-  <% if current_user %>
-    <a><%= current_user.name %></a>
-  <% else %>
-    <a href="/login">Entrar</a>
-  <% end %>
+
+  <div class=px-[3%]>
+    <% if user_signed_in? %>
+      <span> <%= current_user.name %></span>
+      <%= button_to "Sair", destroy_user_session_path, method: :delete %>
+    <% else %>
+        <a href="users/sign_in">Entrar</a>
+    <% end %>
+  </div>
 </navbar>
