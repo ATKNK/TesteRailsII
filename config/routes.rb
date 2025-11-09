@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get "/home", controller: "home", action: :show
+  get "/dashboard", controller: "dashboard", action: :show
 
   resources :questions
   resources :questionnaires
