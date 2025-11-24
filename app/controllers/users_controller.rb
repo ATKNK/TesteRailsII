@@ -4,26 +4,31 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all.includes(:roles)
+    authorize @users 
   end
 
   # GET /users/1 or /users/1.json
   def show
+    authorize @user
   end
 
   # GET /users/new
   def new
     @user = User.new
     @roles = Role.all
+    authorize @user
   end
 
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
     @roles = Role.all
+    authorize @user
   end
 
   # POST /users or /users.json
   def create
+    authorize @user
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -31,6 +36,9 @@ class UsersController < ApplicationController
         @user.role_ids = params[:user][:role_ids]
         format.html { redirect_to @user, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
+
+        UserMailer.welcome_email(@user).deliver_now
+
       else
         @roles = Role.all
         format.html { render :new, status: :unprocessable_entity }
@@ -41,6 +49,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    authorize @user
     respond_to do |format|
       if @user.update(user_params)
         @user.role_ids = params[:user][:role_ids]
@@ -56,6 +65,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
+    authorize @user
     @user.destroy!
 
     respond_to do |format|
