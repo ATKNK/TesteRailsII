@@ -1,23 +1,50 @@
-<p style="color: green"><%= notice %></p>
+<div class="bg-blue-950 border-amber-300 p-6 rounded-lg border-4 flex flex-col w-full max-w-4xl mx-auto">
 
-<%= link_to "Back to questionnaires", questionnaires_path %>
-
-<%= render @questionnaire %>
-
-<h1><%= @questionnaire.title %></h1>
-<p><%= @questionnaire.description %></p>
-
-<h2>Questions</h2>
-<a href="/questions/new">Add more questions</a>
-<ul>
-  <% @questions.each do |question| %>
-    <li><%= question.enunciation %></li>
+  <% if notice.present? %>
+    <p class="text-green-400 mb-4"><%= notice %></p>
   <% end %>
-</ul>
 
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+    <p class="text-3xl text-white font-bold mb-2 sm:mb-0"><%= @questionnaire.title %></p>
+    
+    <%= link_to "Back to questionnaires", questionnaires_path,
+          class: "bg-sky-800 hover:bg-sky-700 border-amber-300 border-2 text-white font-bold p-[1vh] flex justify-center items-center rounded-[3vh]" %>
+  </div>
 
-<div class="flex flex-row pt-[4vh]">
-  <%= link_to "Edit this questionnaire", edit_questionnaire_path(@questionnaire) %> |
+  <!-- Description -->
+  <div class="mb-6">
+    <p class="text-white"><%= @questionnaire.description %></p>
+  </div>
 
-  <%= button_to "Destroy this questionnaire", @questionnaire, method: :delete %>
+  <!-- Questions Section -->
+  <div class="mb-6">
+
+    <div class="flex flex-row justify-between items-center mb-4">
+      <h2 class="text-2xl text-white font-semibold mb-3">Questions</h2>
+      
+      <%= link_to "Add more questions", new_question_path(questionnaire_id: @questionnaire.id),
+        class: "bg-green-600 hover:bg-green-500 border-amber-300 border-2 text-white font-bold p-[1vh] flex justify-center items-center rounded-[3vh]" %>
+      
+    </div>
+
+    <ul class="list-disc list-inside space-y-2 p-[5%] text-white border-2 border-amber-300 rounded-lg bg-slate-800">
+      <% @questions.each do |question| %>
+        <li>
+          <%= link_to question.enunciation, question_path(question), class: "hover:text-amber-300 underline" %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+
+  <!-- Actions -->
+  <div class="flex flex-row gap-4 pt-4">
+    <%= link_to "Edit this questionnaire", edit_questionnaire_path(@questionnaire),
+          class: "bg-sky-800 hover:bg-sky-700 border-amber-300 border-2 text-white font-bold p-[1vh] flex justify-center items-center rounded-[3vh]" %>
+
+    <%= button_to "Destroy this questionnaire", @questionnaire, method: :delete,
+          class: "bg-red-800 hover:bg-red-700 border-amber-300 border-2 text-white font-bold p-[1vh] flex justify-center items-center rounded-[3vh]" %>
+  </div>
+
 </div>

@@ -1,29 +1,30 @@
-<div id="<%= dom_id questionnaire %>" class="flex flex-col justify-around w-[40vh] p-[5%] border border-amber-300 rounded-lg bg-slate-800">
+<div id="<%= dom_id questionnaire %>" class="flex flex-col justify-around w-[40vh] p-[5%] border-2 border-amber-300 rounded-lg bg-slate-800">
 
   <div>
       <div>
-        <strong>Code:</strong>
+        <strong>Código:</strong>
         <%= questionnaire.code %>
       </div>
     
       <div>
-        <strong>Title:</strong>
+        <strong>Título:</strong>
         <%= questionnaire.title %>
       </div>
     
       <div>
-        <strong>Description:</strong>
+        <strong>Descrição:</strong>
         <%= questionnaire.description %>
       </div>
     
       <div>
-        <strong>Duration minutes:</strong>
+        <strong>Duração:</strong>
         <%= questionnaire.duration_minutes %>
+        <span>minutos</span>
       </div>
   </div>
 
   <p class="text-amber-300">
-    <%= link_to "Show this questionnaire", questionnaire %>
+    <%= link_to "Mostrar esse questionário", questionnaire %>
   </p>
 
 </div>

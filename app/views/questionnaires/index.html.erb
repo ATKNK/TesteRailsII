@@ -1,17 +1,24 @@
-<p style="color: #cbfbf1"><%= notice %></p>
-
-<% content_for :title, "Questionnaires" %>
-
-  <div class="flex flex-row justify-between w-full py-[1%]">
-    <p class="text-3xl">Questionnaires</p>
+<div class="bg-blue-950 border-amber-300 p-4 rounded-lg border-4 flex flex-col justify-center items-center w-full">
+    <% if notice.present? %>
+      <p class="text-amber-200"><%= notice %></p>
+    <% end %>
     
-    <%= link_to "New questionnaire", new_questionnaire_path %>
-  </div>
-
-<div id="questionnaires" class="grid grid-cols-3 gap-[5%] justify-center pb-[5vh]">
-  <% @questionnaires.each do |questionnaire| %>
-    <%= render questionnaire %>
-  <% end %>
+    <% content_for :title, "Questionnaires" %>
+    
+      <div class="flex flex-row justify-between w-full py-[2%] px-[2%]">
+        <p class="text-3xl text-white font-bold mb-2 sm:mb-0">Questionnaires</p>
+        
+        <div class="bg-green-600 hover:bg-green-500 border-amber-300 border-2 text-white font-bold p-[1vh] flex justify-center items-center rounded-[3vh]">
+          <%= link_to "New questionnaire", new_questionnaire_path %>
+        </div>
+       
+      </div>
+    
+    <div id="questionnaires" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pb-10">
+      <% @questionnaires.each do |questionnaire| %>
+        <%= render questionnaire %>
+      <% end %>
+    </div>
+  
+  
 </div>
-
-

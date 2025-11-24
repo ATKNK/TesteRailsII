@@ -1,0 +1,20 @@
+<h1 class="text-2xl mb-4"><%= @questionnaire.title %> — Fazer quiz</h1>
+
+<%= form_with url: questionnaire_user_results_path(@questionnaire), method: :post do |f| %>
+  <% @questions.each do |question| %>
+    <div class="mb-6 p-4 border rounded">
+      <p class="font-semibold"><%= question.enunciation %></p>
+
+      <% question.question_options.each do |opt| %>
+        <label class="block mt-2">
+          <%= radio_button_tag "answers[#{question.id}]", opt.id, false, id: "q#{question.id}_opt#{opt.id}" %>
+          <%= label_tag "q#{question.id}_opt#{opt.id}", opt.title, class: "ml-2" %>
+        </label>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.submit "Enviar respostas", class: "bg-amber-400 px-4 py-2 rounded" %>
+  </div>
+<% end %>

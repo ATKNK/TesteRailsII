@@ -1,11 +1,13 @@
-<% content_for :title, "New questionnaire" %>
-
-<h1>New questionnaire</h1>
-
-<%= render "form", questionnaire: @questionnaire %>
-
-<br>
-
-<div>
-  <%= link_to "Back to questionnaires", questionnaires_path %>
+<div class="flex flex-col w-full max-w-4xl mx-auto">
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+    <% content_for :title, "New questionnaire" %>
+    
+    <p class="text-3xl text-white font-bold mb-2 sm:mb-0">New questionnaire</p>
+  
+        <%= link_to "Back to questionnaires", questionnaires_path,
+            class: "bg-sky-800 hover:bg-sky-700 border-amber-300 border-2 text-white font-bold p-[1vh] flex justify-center items-center rounded-[3vh]" %>
+  </div>
+  
+  <%= render "form", questionnaire: @questionnaire %>
+  
 </div>

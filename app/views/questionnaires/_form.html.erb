@@ -1,9 +1,9 @@
-<%= form_with(model: questionnaire) do |form| %>
-  <% if questionnaire.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(questionnaire.errors.count, "error") %> prohibited this questionnaire from being saved:</h2>
+<%= form_with(model: questionnaire, local: true, class: "bg-blue-950 border-amber-300 p-6 rounded-lg border-4 flex flex-col justify-center items-center w-full max-w-md mx-auto") do |form| %>
 
-      <ul>
+  <% if questionnaire.errors.any? %>
+    <div class="bg-red-200 text-red-800 p-3 rounded-lg w-full mb-4">
+      <h2 class="font-bold"><%= pluralize(questionnaire.errors.count, "error") %> prohibited this questionnaire from being saved:</h2>
+      <ul class="list-disc ml-5">
         <% questionnaire.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,27 +11,28 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :code, style: "display: block" %>
-    <%= form.text_field :code %>
+  <div class="w-full mb-4">
+    <%= form.label :code, class: "text-white font-semibold block mb-1" %>
+    <%= form.text_field :code, class: "bg-slate-800 border-2 border-slate-950 rounded-lg w-full p-2" %>
   </div>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="w-full mb-4">
+    <%= form.label :title, class: "text-white font-semibold block mb-1" %>
+    <%= form.text_field :title, class: "bg-slate-800 border-2 border-slate-950 rounded-lg w-full p-2" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="w-full mb-4">
+    <%= form.label :description, class: "text-white font-semibold block mb-1" %>
+    <%= form.text_field :description, class: "bg-slate-800 border-2 border-slate-950 rounded-lg w-full p-2" %>
   </div>
 
-  <div>
-    <%= form.label :duration_minutes, style: "display: block" %>
-    <%= form.number_field :duration_minutes %>
+  <div class="w-full mb-4">
+    <%= form.label :duration_minutes, class: "text-white font-semibold block mb-1" %>
+    <%= form.number_field :duration_minutes, class: "bg-slate-800 border-2 border-slate-950 rounded-lg w-full p-2" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="w-full flex justify-center">
+    <%= form.submit "Save Questionnaire", class: "bg-sky-800 border-2 border-slate-950 rounded-lg w-full p-2 hover:bg-sky-700" %>
   </div>
+
 <% end %>
