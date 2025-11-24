@@ -1,4 +1,4 @@
 class UserResult < ApplicationRecord
   belongs_to :user
-  belongs_to :questionnaires
+  belongs_to :questionnaire
 end

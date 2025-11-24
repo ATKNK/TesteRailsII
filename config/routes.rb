@@ -7,8 +7,14 @@ Rails.application.routes.draw do
   get "/dashboard", controller: "dashboard", action: :show
 
   resources :questions
-  resources :questionnaires
+
+  resources :questionnaires do
+    resources :user_results, only: [:new, :create]
+    get 'take', to: 'user_results#new', on: :member
+  end
+
   resources :question_options
+
   resources :users do
     resources :roles
   end

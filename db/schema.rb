@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_09_214623) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_24_031923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "question_options", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.datetime "deleted_at", precision: nil
     t.boolean "is_correct"
     t.bigint "question_id", null: false
     t.string "title"
@@ -57,6 +58,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_09_214623) do
     t.index ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
   end
 
+
   create_table "user_answer_histories", force: :cascade do |t|
     t.datetime "answered_at", precision: nil
     t.datetime "created_at", null: false
@@ -65,12 +67,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_09_214623) do
     t.bigint "question_id", null: false
     t.bigint "question_option_id", null: false
     t.text "question_snapshot"
-    t.bigint "questionnaires_id", null: false
+    t.bigint "questionnaire_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["question_id"], name: "index_user_answer_histories_on_question_id"
     t.index ["question_option_id"], name: "index_user_answer_histories_on_question_option_id"
-    t.index ["questionnaires_id"], name: "index_user_answer_histories_on_questionnaires_id"
+    t.index ["questionnaire_id"], name: "index_user_answer_histories_on_questionnaire_id"
     t.index ["user_id"], name: "index_user_answer_histories_on_user_id"
   end
 
@@ -78,13 +80,13 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_09_214623) do
     t.integer "correct_answers"
     t.datetime "created_at", null: false
     t.datetime "deleted_at", precision: nil
-    t.bigint "questionnaires_id", null: false
+    t.bigint "questionnaire_id", null: false
     t.decimal "score"
     t.datetime "submitted_at", precision: nil
     t.integer "total_questions"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["questionnaires_id"], name: "index_user_results_on_questionnaires_id"
+    t.index ["questionnaire_id"], name: "index_user_results_on_questionnaire_id"
     t.index ["user_id"], name: "index_user_results_on_user_id"
   end
 
@@ -106,9 +108,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_09_214623) do
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "questionnaires"
   add_foreign_key "user_answer_histories", "question_options"
-  add_foreign_key "user_answer_histories", "questionnaires", column: "questionnaires_id"
+  add_foreign_key "user_answer_histories", "questionnaires"
   add_foreign_key "user_answer_histories", "questions"
   add_foreign_key "user_answer_histories", "users"
-  add_foreign_key "user_results", "questionnaires", column: "questionnaires_id"
+  add_foreign_key "user_results", "questionnaires"
   add_foreign_key "user_results", "users"
 end
